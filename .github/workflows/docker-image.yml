@@ -23,18 +23,20 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      # BACKEND BUILD
       - name: Build and push backend image
         uses: docker/build-push-action@v5
         with:
-          context: ./BACKEND
-          file: ./BACKEND/backend.Dockerfile
+          context: ./springbootbackend
+          file: ./springbootbackend/backend.Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/k8-backend-practice:latest
 
+      # FRONTEND BUILD
       - name: Build and push frontend image
         uses: docker/build-push-action@v5
         with:
-          context: ./FRONTEND
-          file: ./FRONTEND/frontend.Dockerfile
+          context: ./reactfrontend
+          file: ./reactfrontend/frontend.Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/k8-frontend-practice:latest
